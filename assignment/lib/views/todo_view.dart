@@ -83,6 +83,8 @@ class _TodoViewState extends State<TodoView> {
             onChanged: (bool value) {
               setState(() {
                 todoItem.isDone = value;
+                Provider.of<TodoState>(context, listen: false)
+                    .changeIsDone(todoItem);
               });
             },
           ),
