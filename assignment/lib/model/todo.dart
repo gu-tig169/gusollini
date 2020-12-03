@@ -1,19 +1,35 @@
+import 'package:assignment/service/rest_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class Todo {
+  String id;
   String title;
   bool isDone;
 
-  Todo({this.title, this.isDone = false});
+  Todo({this.id, this.title, this.isDone = false});
 }
 
 class TodoState with ChangeNotifier {
   List<Todo> _list = [];
 
+  TodoState() {
+    _injectList();
+  }
+
+  void _injectList() async {
+    this._list = await RestService.getTodos();
+    notifyListeners();
+  }
+
   List<Todo> get list => _list;
 
-  void addTodo(Todo todo) {
-    _list.add(todo);
+  void addTodo(Todo todo) async {
+    _list = await RestService.postTodo(todo);
+    notifyListeners();
+  }
+
+  void changeIsDone(Todo todo) async {
+    _list = await RestService.putTodo(todo);
     notifyListeners();
   }
 
@@ -27,8 +43,8 @@ class TodoState with ChangeNotifier {
     return _list;
   }
 
-  void removeTodo(Todo todo) {
-    _list.remove(todo);
+  void removeTodo(Todo todo) async {
+    _list = await RestService.deleteTodo(todo);
     notifyListeners();
   }
 }
