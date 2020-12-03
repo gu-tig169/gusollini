@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class RestService {
   static final String _url =
       "https://todoapp-api-vldfm.ondigitalocean.app/todos";
-  static final String _key = "b0b27bbb-47e3-46a0-8f0b-45bf6cc302ab";
+  static final String _key = "25fb8ff0-cff2-43fe-bd33-f6c871fc813c";
 
   static Future<List<Todo>> getTodos() async {
     http.Response response = await http.get(_url + "?key=" + _key);

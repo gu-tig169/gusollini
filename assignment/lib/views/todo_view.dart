@@ -90,7 +90,12 @@ class _TodoViewState extends State<TodoView> {
           ),
           title: Text(
             todoItem.title,
-            style: TextStyle(color: Colors.white, fontSize: 34),
+            style: TextStyle(
+                decoration: (todoItem.isDone)
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+                color: Colors.white,
+                fontSize: 34),
           ),
           trailing: IconButton(
             color: Colors.white,
